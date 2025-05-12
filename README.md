@@ -18,9 +18,11 @@ repositories:
     version: main
 ```
 
-### Import the repository
+### Import the repository and initialize the Canboat submododule
 
-`vcs import src < your_project.repos`
+```
+vcs import src < your_project.repos
+```
 
 Then from here on out its standard ROS 2 building:
 
