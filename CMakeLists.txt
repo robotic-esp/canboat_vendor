@@ -6,6 +6,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+include(ExternalProject)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -30,9 +31,13 @@ execute_process(
 set(BUILD_DIR "rel/${OS_NAME_LOWER}-${ARCH}")
 message(STATUS "Canboat building into: ${BUILD_DIR}")
 
-add_custom_target(build_canboat ALL
-  COMMAND make
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/external/canboat
+ExternalProject_Add(canboat
+  GIT_REPOSITORY https://github.com/canboat/canboat.git
+  GIT_TAG master
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND make
+  INSTALL_COMMAND ""
+  BUILD_IN_SOURCE 1
 )
 
 file(GLOB CANBOAT_BINARIES

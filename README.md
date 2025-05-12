@@ -18,16 +18,10 @@ repositories:
     version: main
 ```
 
-### Import the repository and initialize the Canboat submododule
+### Instruct users to import your external depdencies
+In order to use your project, users will need to run:
 
 ```
 vcs import src < your_project.repos
 ```
-
-Then from here on out its standard ROS 2 building:
-
-```
-rosdep install --from-paths src --ignore-src -r -y
-colcon build
-source install/setup.sh
-```
+before building your project.
