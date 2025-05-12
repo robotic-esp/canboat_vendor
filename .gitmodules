@@ -1,0 +1,3 @@
+[submodule "external/canboat"]
+	path = external/canboat
+	url = https://github.com/canboat/canboat.git
