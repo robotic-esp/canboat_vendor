@@ -16,20 +16,20 @@ if(BUILD_TESTING)
 endif()
 
 execute_process(
-  COMMAND uname
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  OUTPUT_VARIABLE OS_NAME
+  COMMAND uname 
+  OUTPUT_VARIABLE OS_NAME 
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 string(TOLOWER "${OS_NAME}" OS_NAME_LOWER)
 
 execute_process(
-  COMMAND uname -m
-  OUTPUT_VARIABLE ARCH
+  COMMAND uname -m 
+  OUTPUT_VARIABLE ARCH 
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-set(BUILD_DIR "rel/${OS_NAME_LOWER}-${ARCH}")
-message(STATUS "Canboat building into: ${BUILD_DIR}")
+set(CANBOAT_PLATFORM "rel/${OS_NAME_LOWER}-${ARCH}")
+
+set(CANBOAT_BUILD_DIR "${CMAKE_BINARY_DIR}/canboat-prefix/src/canboat/${CANBOAT_PLATFORM}")
 
 ExternalProject_Add(canboat
   GIT_REPOSITORY https://github.com/canboat/canboat.git
@@ -40,13 +40,11 @@ ExternalProject_Add(canboat
   BUILD_IN_SOURCE 1
 )
 
-file(GLOB CANBOAT_BINARIES
-  "${CMAKE_CURRENT_SOURCE_DIR}/external/canboat/${BUILD_DIR}/*"
+add_custom_target(install_canboat_binaries ALL
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CANBOAT_BUILD_DIR} ${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
 )
 
-install(PROGRAMS
-  ${CANBOAT_BINARIES}
-  DESTINATION lib/${PROJECT_NAME}
-)
+add_dependencies(install_canboat_binaries canboat)
 
 ament_package()
