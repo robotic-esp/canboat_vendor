@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(ros_canboat)
+project(canboat_vendor)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,6 +7,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 include(ExternalProject)
+include(GNUInstallDirs)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -15,36 +16,18 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-execute_process(
-  COMMAND uname 
-  OUTPUT_VARIABLE OS_NAME 
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-string(TOLOWER "${OS_NAME}" OS_NAME_LOWER)
-
-execute_process(
-  COMMAND uname -m 
-  OUTPUT_VARIABLE ARCH 
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-set(CANBOAT_PLATFORM "rel/${OS_NAME_LOWER}-${ARCH}")
-
-set(CANBOAT_BUILD_DIR "${CMAKE_BINARY_DIR}/canboat-prefix/src/canboat/${CANBOAT_PLATFORM}")
+set(CANBOAT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/canboat)
 
 ExternalProject_Add(canboat
-  GIT_REPOSITORY https://github.com/canboat/canboat.git
-  GIT_TAG master
+  SOURCE_DIR ${CANBOAT_SRC_DIR}
   CONFIGURE_COMMAND ""
-  BUILD_COMMAND make
-  INSTALL_COMMAND ""
-  BUILD_IN_SOURCE 1
+  INSTALL_DIR ${CMAKE_INSTALL_PREFIX} 
+  BUILD_COMMAND BUILDDIR=rel ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR>
+  INSTALL_COMMAND
+    ${CMAKE_COMMAND} -E copy_directory
+      <SOURCE_DIR>/rel
+      <INSTALL_DIR>/lib/${PROJECT_NAME}
+  UPDATE_COMMAND ""
 )
-
-add_custom_target(install_canboat_binaries ALL
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CANBOAT_BUILD_DIR} ${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
-)
-
-add_dependencies(install_canboat_binaries canboat)
 
 ament_package()
