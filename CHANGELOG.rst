@@ -2,8 +2,8 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2025-05-14)
+------------------
 * Update README.md to use new name: canboat_vendor
 * Add license file
 * Use static build directory instead of matching platform name
