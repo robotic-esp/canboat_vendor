@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
+
+message(${CMAKE_VERSION})
+
 project(canboat_vendor)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -8,19 +11,19 @@ endif()
 find_package(ament_cmake REQUIRED)
 include(ExternalProject)
 
+include(ExternalProject)
 ExternalProject_Add(canboat
-  GIT_REPOSITORY https://github.com/canboat/canboat.git
-  GIT_TAG v5.1.3
-  PREFIX ${CMAKE_BINARY_DIR}/external/
-  SOURCE_DIR ${CMAKE_BINARY_DIR}/external/canboat/
-  INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
-  CONFIGURE_COMMAND ""
-  BUILD_COMMAND BUILDDIR=rel ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR>
+  PREFIX             ${CMAKE_BINARY_DIR}/external
+  GIT_REPOSITORY     https://github.com/canboat/canboat.git
+  GIT_TAG            v5.1.3
+  UPDATE_COMMAND     ""
+  CONFIGURE_COMMAND  ""
+  BUILD_IN_SOURCE    1
+  BUILD_COMMAND      ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR> BUILDDIR=rel
   INSTALL_COMMAND
     ${CMAKE_COMMAND} -E copy_directory
       <SOURCE_DIR>/rel
-      <INSTALL_DIR>/lib/${PROJECT_NAME}
-  UPDATE_COMMAND ""
+      ${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
 )
 
 ament_package()
