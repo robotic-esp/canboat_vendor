@@ -9,7 +9,7 @@ find_package(ament_cmake REQUIRED)
 include(ExternalProject)
 
 ExternalProject_Add(canboat
-  GIT_REPOSITORY git@github.com:canboat/canboat.git
+  GIT_REPOSITORY https://github.com/canboat/canboat.git
   GIT_TAG v5.1.3
   PREFIX ${CMAKE_BINARY_DIR}/external/
   SOURCE_DIR ${CMAKE_BINARY_DIR}/external/canboat/
