@@ -2,8 +2,8 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2025-06-10)
+------------------
 * Add "How to Use" section to README.md
 * Bugfix: update ExternalProject_Add statement for compliance with older CMake versions
 * Bugfix: swap to HTTPs URL so cloning possible w/o git SSH key
