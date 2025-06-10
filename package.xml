@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>canboat_vendor</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>Thin package wrapper for Canboat</description>
   <maintainer email="severn.lortie@gmail.com">Severn Lortie</maintainer>
   <license>Apache 2.0</license>
