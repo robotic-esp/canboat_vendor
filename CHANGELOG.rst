@@ -2,6 +2,16 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add "How to Use" section to README.md
+* Bugfix: update ExternalProject_Add statement for compliance with older CMake versions
+* Bugfix: swap to HTTPs URL so cloning possible w/o git SSH key
+* Add the Makefile to .gitignore
+* Remove the Makefile from git
+* Switch to letting CMake download the Canboat repo at build time with ExternalProject_Add
+* Contributors: Severn Lortie
+
 0.0.1 (2025-05-14)
 ------------------
 * Update README.md to use new name: canboat_vendor
