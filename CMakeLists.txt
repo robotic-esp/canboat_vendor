@@ -9,7 +9,6 @@ endif()
 find_package(ament_cmake REQUIRED)
 include(ExternalProject)
 
-include(ExternalProject)
 ExternalProject_Add(
   canboat
   PREFIX ${CMAKE_BINARY_DIR}/external
@@ -19,11 +18,10 @@ ExternalProject_Add(
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE 1
   BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR> BUILDDIR=rel
-  INSTALL_COMMAND
-    ${CMAKE_COMMAND} -E make_directory
-    $ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME} &&
-    ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/rel
-    $ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}
+  INSTALL_COMMAND ""
 )
+ExternalProject_Get_Property(canboat SOURCE_DIR)
+
+install(PROGRAMS ${SOURCE_DIR}/rel/ DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
