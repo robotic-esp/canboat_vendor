@@ -21,7 +21,23 @@ ExternalProject_Add(
   INSTALL_COMMAND ""
 )
 ExternalProject_Get_Property(canboat SOURCE_DIR)
-
-install(PROGRAMS ${SOURCE_DIR}/rel/ DESTINATION lib/${PROJECT_NAME})
+install(
+  PROGRAMS ${SOURCE_DIR}/rel/actisense-serial
+           ${SOURCE_DIR}/rel/analyzer
+           ${SOURCE_DIR}/rel/analyzer-explain
+           ${SOURCE_DIR}/rel/analyzer-j1939
+           ${SOURCE_DIR}/rel/analyzer-explain-j1939
+           ${SOURCE_DIR}/rel/candump2analyzer
+           ${SOURCE_DIR}/rel/command-group-function
+           ${SOURCE_DIR}/rel/ikonvert-serial
+           ${SOURCE_DIR}/rel/iptee
+           ${SOURCE_DIR}/rel/n2kd
+           ${SOURCE_DIR}/rel/n2kd_monitor
+           ${SOURCE_DIR}/rel/nmea0183-serial
+           ${SOURCE_DIR}/rel/request-group-function
+           ${SOURCE_DIR}/rel/replay
+           ${SOURCE_DIR}/rel/socketcan-writer
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()
