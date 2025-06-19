@@ -2,6 +2,14 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add license headers
+* Explicitly enumerate every program to install since newer versions of CMake won't take a directory as an argument here
+* Switch to using install() in hopes that Jenkins build doesn't break
+* Honour DESTDIR to prevent installs into protected /opt directory
+* Contributors: Severn Lortie
+
 0.0.2 (2025-06-10)
 ------------------
 * Add "How to Use" section to README.md
