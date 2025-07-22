@@ -24,7 +24,7 @@ find_package(ament_cmake REQUIRED)
 
 find_program(ADDLICENSE_EXECUTABLE NAMES addlicense)
 if(ADDLICENSE_EXECUTABLE)
-  add_custom_target(apply_license_headers ALL
+  add_custom_target(apply_license_headers
     COMMAND ${ADDLICENSE_EXECUTABLE}
             -c "Robotic ESP"
             -l apache
@@ -49,25 +49,55 @@ ExternalProject_Add(
   BUILD_IN_SOURCE 1
   BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR> BUILDDIR=rel
   INSTALL_COMMAND ""
+  BUILD_BYPRODUCTS
+    <SOURCE_DIR>/rel/actisense-serial
+    <SOURCE_DIR>/rel/analyzer
+    <SOURCE_DIR>/rel/analyzer-explain
+    <SOURCE_DIR>/rel/analyzer-j1939
+    <SOURCE_DIR>/rel/analyzer-explain-j1939
+    <SOURCE_DIR>/rel/candump2analyzer
+    <SOURCE_DIR>/rel/command-group-function
+    <SOURCE_DIR>/rel/ikonvert-serial
+    <SOURCE_DIR>/rel/iptee
+    <SOURCE_DIR>/rel/n2kd
+    <SOURCE_DIR>/rel/n2kd_monitor
+    <SOURCE_DIR>/rel/nmea0183-serial
+    <SOURCE_DIR>/rel/request-group-function
+    <SOURCE_DIR>/rel/replay
+    <SOURCE_DIR>/rel/socketcan-writer
 )
+
 ExternalProject_Get_Property(canboat SOURCE_DIR)
+set(CANBOAT_BIN_DIR ${SOURCE_DIR}/rel)
+set(CANBOAT_TOOLS
+  actisense-serial
+  analyzer
+  analyzer-explain
+  analyzer-j1939
+  analyzer-explain-j1939
+  candump2analyzer
+  command-group-function
+  ikonvert-serial
+  iptee
+  n2kd
+  n2kd_monitor
+  nmea0183-serial
+  request-group-function
+  replay
+  socketcan-writer
+)
+set(CANBOAT_BINARIES "")
+foreach(_t ${CANBOAT_TOOLS})
+  list(APPEND CANBOAT_BINARIES ${CANBOAT_BIN_DIR}/${_t})
+endforeach()
+
 install(
-  PROGRAMS ${SOURCE_DIR}/rel/actisense-serial
-           ${SOURCE_DIR}/rel/analyzer
-           ${SOURCE_DIR}/rel/analyzer-explain
-           ${SOURCE_DIR}/rel/analyzer-j1939
-           ${SOURCE_DIR}/rel/analyzer-explain-j1939
-           ${SOURCE_DIR}/rel/candump2analyzer
-           ${SOURCE_DIR}/rel/command-group-function
-           ${SOURCE_DIR}/rel/ikonvert-serial
-           ${SOURCE_DIR}/rel/iptee
-           ${SOURCE_DIR}/rel/n2kd
-           ${SOURCE_DIR}/rel/n2kd_monitor
-           ${SOURCE_DIR}/rel/nmea0183-serial
-           ${SOURCE_DIR}/rel/request-group-function
-           ${SOURCE_DIR}/rel/replay
-           ${SOURCE_DIR}/rel/socketcan-writer
+  PROGRAMS ${CANBOAT_BINARIES}
   DESTINATION lib/${PROJECT_NAME}
 )
+
+if(TARGET install)
+  add_dependencies(install canboat)
+endif()
 
 ament_package()
