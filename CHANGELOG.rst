@@ -2,6 +2,12 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* bugfix: add <buildtool_depend> for git to fix CI envs without it
+* Update CMakeLists.txt to wait for build before copy
+* Contributors: Severn Lortie
+
 0.0.3 (2025-06-19)
 ------------------
 * Add license headers
