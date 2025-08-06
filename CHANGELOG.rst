@@ -2,6 +2,11 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Respect -fPIE flag if set
+* Contributors: Severn Lortie
+
 0.0.4 (2025-07-24)
 ------------------
 * bugfix: add <buildtool_depend> for git to fix CI envs without it
