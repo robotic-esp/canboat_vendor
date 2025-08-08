@@ -2,6 +2,11 @@
 Changelog for package canboat_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Force -fPIE since Canboat's Makefile overrides env vars
+* Contributors: Severn Lortie
+
 0.0.5 (2025-08-06)
 ------------------
 * Respect -fPIE flag if set
