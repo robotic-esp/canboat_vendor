@@ -15,16 +15,14 @@ This is a wrapper around the [Canboat repository](https://github.com/canboat/can
 3.  Available executables are:
     - `actisense-serial`
     - `analyzer`
-    - `analyzer-explain`
-    - `analyzer-explain-j1939`
     - `analyzer-j1939`
     - `candump2analyzer`
     - `command-group-function`
     - `ikonvert-serial`
     - `iptee`
-    - `n2kd`
-    - `n2kd_monitor`
+    - `maretron-ipg`
     - `nmea0183-serial`
     - `replay`
     - `request-group-function`
+    - `socketcan-serial`
     - `socketcan-writer`

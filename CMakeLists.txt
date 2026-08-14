@@ -43,7 +43,8 @@ ExternalProject_Add(
   canboat
   PREFIX ${CMAKE_BINARY_DIR}/external
   GIT_REPOSITORY https://github.com/canboat/canboat.git
-  GIT_TAG v5.1.3
+  # Keep this revision aligned with the database used by canboat_messages.
+  GIT_TAG 85a52495ad3a1be10eb447b52c25afbc3bbc9a51
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE 1
@@ -55,18 +56,16 @@ ExternalProject_Add(
   BUILD_BYPRODUCTS
     <SOURCE_DIR>/rel/actisense-serial
     <SOURCE_DIR>/rel/analyzer
-    <SOURCE_DIR>/rel/analyzer-explain
     <SOURCE_DIR>/rel/analyzer-j1939
-    <SOURCE_DIR>/rel/analyzer-explain-j1939
     <SOURCE_DIR>/rel/candump2analyzer
     <SOURCE_DIR>/rel/command-group-function
     <SOURCE_DIR>/rel/ikonvert-serial
     <SOURCE_DIR>/rel/iptee
-    <SOURCE_DIR>/rel/n2kd
-    <SOURCE_DIR>/rel/n2kd_monitor
+    <SOURCE_DIR>/rel/maretron-ipg
     <SOURCE_DIR>/rel/nmea0183-serial
     <SOURCE_DIR>/rel/request-group-function
     <SOURCE_DIR>/rel/replay
+    <SOURCE_DIR>/rel/socketcan-serial
     <SOURCE_DIR>/rel/socketcan-writer
 )
 
@@ -75,18 +74,16 @@ set(CANBOAT_BIN_DIR ${SOURCE_DIR}/rel)
 set(CANBOAT_TOOLS
   actisense-serial
   analyzer
-  analyzer-explain
   analyzer-j1939
-  analyzer-explain-j1939
   candump2analyzer
   command-group-function
   ikonvert-serial
   iptee
-  n2kd
-  n2kd_monitor
+  maretron-ipg
   nmea0183-serial
   request-group-function
   replay
+  socketcan-serial
   socketcan-writer
 )
 set(CANBOAT_BINARIES "")
@@ -97,6 +94,10 @@ endforeach()
 install(
   PROGRAMS ${CANBOAT_BINARIES}
   DESTINATION lib/${PROJECT_NAME}
+)
+install(
+  FILES ${SOURCE_DIR}/docs/canboat.json
+  DESTINATION share/${PROJECT_NAME}
 )
 
 if(TARGET install)
