@@ -49,6 +49,8 @@ ExternalProject_Add(
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE 1
   PATCH_COMMAND
+    ${CMAKE_COMMAND} -E chdir <SOURCE_DIR>
+      git apply ${CMAKE_CURRENT_SOURCE_DIR}/patches/iptee-reuse-address.patch &&
     ${CMAKE_COMMAND} -E echo "override CFLAGS += -fpie" >> <SOURCE_DIR>/Makefile &&
     ${CMAKE_COMMAND} -E echo "override LDFLAGS += -pie"  >> <SOURCE_DIR>/Makefile
   BUILD_COMMAND ${CMAKE_MAKE_PROGRAM} -C <SOURCE_DIR> BUILDDIR=rel
